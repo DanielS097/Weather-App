@@ -19,4 +19,16 @@ $(document).ready(function () {
                 displayError('Error fetching current weather data');
             });
 
-            
+
+        // 5-day forecast
+        fetch(forecastApiUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                displayForecast(data.list);
+            })
+            .catch(function () {
+                console.error('Error fetching forecast data');
+            });
+    }
