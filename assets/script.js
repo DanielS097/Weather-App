@@ -75,3 +75,52 @@ $(document).ready(function () {
         resetWeatherInfo();
     }
 
+    function resetWeatherInfo() {
+        $('#city, #temperature, #description, #humidity, #wind-speed, #icon, #forecast-container').empty();
+    }
+
+    function saveToLocalStorage(city) {
+        const searchHistory = JSON.parse(localStorage.getItem('weatherAppSearchHistory')) || [];
+        if (searchHistory.indexOf(city) === -1) {
+            searchHistory.push(city);
+            localStorage.setItem('weatherAppSearchHistory', JSON.stringify(searchHistory));
+            updateHistoryButtons();
+        }
+    }
+
+    function updateHistoryButtons() {
+        const historyButtonsContainer = $('#historyButtons');
+        const searchHistory = JSON.parse(localStorage.getItem('weatherAppSearchHistory')) || [];
+        historyButtonsContainer.empty();
+
+        for (let i = 0; i < searchHistory.length; i++) {
+            const historyButton = $('<button></button>').text(searchHistory[i]);
+            historyButton.on('click', function () {
+                $('#cityInput').val(searchHistory[i]);
+                fetchWeather(searchHistory[i]);
+            });
+
+            historyButtonsContainer.append(historyButton);
+        }
+    }
+
+    $('#searchBtn').on('click', function () {
+        const cityInput = $('#cityInput').val();
+        if (cityInput.trim() !== '') {
+            fetchWeather(cityInput);
+        } else {
+            displayError('Please enter a city');
+        }
+    });
+
+    updateHistoryButtons();
+});
+
+
+
+
+
+
+
+
+
