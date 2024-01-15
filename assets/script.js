@@ -4,3 +4,19 @@ $(document).ready(function () {
     function fetchWeather(city) {
         const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric';
         const forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + apiKey + '&units=metric';
+
+
+        // current weather
+        fetch(apiUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                updateWeatherInfo(data);
+                saveToLocalStorage(city);
+            })
+            .catch(function () {
+                displayError('Error fetching current weather data');
+            });
+
+            
