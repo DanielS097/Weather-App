@@ -62,3 +62,35 @@ button:hover {
 #historyButtons button:hover {
     background-color: #114e94;
 }
+
+#error-message {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#forecast {
+    margin-top: 20px;
+}
+
+#forecast-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.forecast-item {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #02233e;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    margin-right: 10px;
+    color: white;
+}
+
+#humidity,
+#wind-speed {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
