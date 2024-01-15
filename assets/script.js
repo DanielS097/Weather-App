@@ -43,3 +43,8 @@ $(document).ready(function () {
         $('#icon').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
         $('#error-message').text('');
     }
+
+    //function to convert wind speed from m/s to km/h
+    function convertToKMH(speed) {
+        return Math.round(speed * 3.6);
+    }
