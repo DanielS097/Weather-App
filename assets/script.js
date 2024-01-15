@@ -48,3 +48,30 @@ $(document).ready(function () {
     function convertToKMH(speed) {
         return Math.round(speed * 3.6);
     }
+
+    function displayForecast(forecastList) {
+        const forecastContainer = $('#forecast-container');
+        forecastContainer.empty();
+
+        for (let i = 0; i < forecastList.length; i += 8) {
+            const forecastDate = dayjs.unix(forecastList[i].dt).format('DD/MM/YYYY');
+            const forecastTemp = Math.round(forecastList[i].main.temp);
+            const forecastHumidity = forecastList[i].main.humidity;
+            const forecastWindSpeed = convertToKMH(forecastList[i].wind.speed);
+
+            const forecastItem = $('<div class="forecast-item"></div>').html(
+                `<p>Date: ${forecastDate}</p>` +
+                `<p>Temperature: ${forecastTemp}°C</p>` +
+                `<p>Humidity: ${forecastHumidity}%</p>` +
+                `<p>Wind Speed: ${forecastWindSpeed} KM/H</p>`
+            );
+
+            forecastContainer.append(forecastItem);
+        }
+    }
+
+    function displayError(message) {
+        $('#error-message').text(message);
+        resetWeatherInfo();
+    }
+
