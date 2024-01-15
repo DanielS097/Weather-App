@@ -32,3 +32,14 @@ $(document).ready(function () {
                 console.error('Error fetching forecast data');
             });
     }
+
+    function updateWeatherInfo(data) {
+        const currentDate = dayjs().format('dddd, DD/MM/YYYY');
+        $('#city').html(`${data.name} - ${currentDate}`);
+        $('#temperature').text('Temperature: ' + Math.round(data.main.temp) + '°C');
+        $('#description').text('Description: ' + data.weather[0].description);
+        $('#humidity').text('Humidity: ' + data.main.humidity + '%');
+        $('#wind-speed').text('Wind Speed: ' + convertToKMH(data.wind.speed) + ' KM/H');
+        $('#icon').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
+        $('#error-message').text('');
+    }
